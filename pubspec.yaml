@@ -39,6 +39,7 @@ dependencies:
   flutter_emoji: 2.4.0
   dots_indicator: ^2.1.0
   visibility_detector: ^0.3.3
+  carousel_slider: ^4.1.1
 
 dev_dependencies:
   flutter_test:
