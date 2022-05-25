@@ -1,4 +1,5 @@
 import 'package:deveo_site_web/notifier/change_layout_notifier.dart';
+import 'package:deveo_site_web/notifier/on_candidate_clik_notifier.dart';
 import 'package:deveo_site_web/painter/circle_draw.dart';
 import 'package:deveo_site_web/widget/layout_horizontal_padding.dart';
 import 'package:flutter/material.dart';
@@ -94,9 +95,7 @@ class _BandPresentationState extends State<BandPresentation>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'DEVEO, une équipe de professionnelle',
-                                  overflow: TextOverflow.fade,
-                                  textAlign: TextAlign.start,
+                                  'DEVEO, une équipe de professionnels',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline1!
@@ -124,48 +123,44 @@ class _BandPresentationState extends State<BandPresentation>
                     }),
                     Padding(
                       padding: const EdgeInsets.only(top: 75),
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 250),
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                                const StadiumBorder()),
-                            elevation:
-                                MaterialStateProperty.resolveWith((states) {
-                              if (states.contains(MaterialState.hovered)) {
-                                return 20;
-                              }
-                              return 5;
-                            }),
-                            shadowColor:
-                                MaterialStateProperty.resolveWith((states) {
-                              if (states.contains(MaterialState.hovered)) {
-                                return Theme.of(context).colorScheme.secondary;
-                              }
-                              return Colors.grey;
-                            }),
-                          ),
-                          onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 18.0,
-                                bottom: 18.0,
-                                left: 25.0,
-                                right: 25.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20, right: 20),
-                                  child: Text(
-                                    'Candidater',
-                                    style: Theme.of(context).textTheme.button,
-                                  ),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all(const StadiumBorder()),
+                          elevation:
+                              MaterialStateProperty.resolveWith((states) {
+                            if (states.contains(MaterialState.hovered)) {
+                              return 20;
+                            }
+                            return 5;
+                          }),
+                          shadowColor:
+                              MaterialStateProperty.resolveWith((states) {
+                            if (states.contains(MaterialState.hovered)) {
+                              return Theme.of(context).colorScheme.secondary;
+                            }
+                            return Colors.grey;
+                          }),
+                        ),
+                        onPressed: () =>
+                            context.read<OnCandidateClikNotifier>().scroll(4),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 18.0, bottom: 18.0, left: 25.0, right: 25.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20, right: 20),
+                                child: Text(
+                                  'Candidater',
+                                  style: Theme.of(context).textTheme.button,
                                 ),
-                                const Icon(Icons.newspaper)
-                              ],
-                            ),
+                              ),
+                              const Icon(Icons.newspaper)
+                            ],
                           ),
                         ),
                       ),

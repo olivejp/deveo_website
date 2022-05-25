@@ -9,7 +9,7 @@ class BandAPropos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutHorizontalPadding(
-      top: 150,
+      top: 50,
       bottom: 150,
       child: Consumer<ChangeLayoutNotifier>(
           child: Column(
@@ -21,6 +21,7 @@ class BandAPropos extends StatelessWidget {
               ),
               Text(
                 "Société de développement logiciel et de sites internet fondée en 2018 à Nouméa en Nouvelle Calédonie, DEVEO NC conseille et accompagne ses clients dans la définition, l'étude, la conception et la réalisation de leurs projets.",
+                textAlign: TextAlign.justify,
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               Text(
@@ -49,6 +50,7 @@ class BandAPropos extends StatelessWidget {
                       ),
                       child: Image.asset(
                         'assets/developper_group.jpeg',
+                        fit: BoxFit.fitHeight,
                       ),
                     ),
                   ),
