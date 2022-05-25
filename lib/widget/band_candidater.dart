@@ -20,103 +20,100 @@ class BandCandidater extends StatelessWidget {
             Wrap(
               direction: Axis.horizontal,
               children: [
-                Flexible(
-                    child: Column(
+                Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 25,
-                        bottom: 25,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 25,
+                    bottom: 25,
+                  ),
+                  child: Text(
+                    'Développeur(se) Fullstack Java / Angular',
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                ),
+                RichText(
+                  text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyText2,
+                      children: [
+                        const TextSpan(
+                            text:
+                                'Pour renforcer nos équipes et répondre aux besoins de nos clients, nous sommes à la recherche d\'un(e) développeur(se) d\'applications dans le domaine '),
+                        TextSpan(
+                          text: 'JAVA / J2EE',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                        const TextSpan(text: '.\n\n'),
+                        const TextSpan(
+                            text: 'Votre mission serait de : \n\n'),
+                        const TextSpan(
+                            text:
+                                '- Participer aux ateliers d\'études et de conception\n'),
+                        const TextSpan(
+                            text:
+                                '- Développer les fonctionnalités décrites dans le cahier des charges dans un environnement Java/J2EE\n'),
+                        const TextSpan(
+                            text:
+                                '- Rédiger et metter à jour les spécifications techniques et fonctionnelles\n\n'),
+                        const TextSpan(
+                            text:
+                                'Nous recherchons un profil à fort potentiel. Votre esprit d\'analyse, vos qualités relationnelles et votre capacité d\'adaptation seront vos atouts pour réussir les missions qui vous seront confiées.\n\n'),
+                        const TextSpan(
+                            text:
+                                'Vous êtes ingénieur ou diplômé universitaire avec option informatique, doté d\'une première expérience significative sur un poste similaire, alors envoyez-nous votre CV à l\'adresse contact@deveo.nc'),
+                      ]),
+                ),
+                  ],
+                ),
+                Form(
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.phone_android),
+                          helperText: 'Nom',
+                        ),
                       ),
-                      child: Text(
-                        'Développeur(se) Fullstack Java / Angular',
-                        style: Theme.of(context).textTheme.subtitle1,
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.phone_android),
+                          helperText: 'Prénom',
+                        ),
                       ),
-                    ),
-                    RichText(
-                      text: TextSpan(
-                          style: Theme.of(context).textTheme.bodyText2,
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.mail_outline_rounded),
+                          helperText: 'Email',
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.phone_android),
+                          helperText: 'Téléphone',
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const TextSpan(
-                                text:
-                                    'Pour renforcer nos équipes et répondre aux besoins de nos clients, nous sommes à la recherche d\'un(e) développeur(se) d\'applications dans le domaine '),
-                            TextSpan(
-                              text: 'JAVA / J2EE',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.primary,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              child: Text(
+                                'Envoyer',
+                                style: Theme.of(context).textTheme.button,
                               ),
                             ),
-                            const TextSpan(text: '.\n\n'),
-                            const TextSpan(
-                                text: 'Votre mission serait de : \n\n'),
-                            const TextSpan(
-                                text:
-                                    '- Participer aux ateliers d\'études et de conception\n'),
-                            const TextSpan(
-                                text:
-                                    '- Développer les fonctionnalités décrites dans le cahier des charges dans un environnement Java/J2EE\n'),
-                            const TextSpan(
-                                text:
-                                    '- Rédiger et metter à jour les spécifications techniques et fonctionnelles\n\n'),
-                            const TextSpan(
-                                text:
-                                    'Nous recherchons un profil à fort potentiel. Votre esprit d\'analyse, vos qualités relationnelles et votre capacité d\'adaptation seront vos atouts pour réussir les missions qui vous seront confiées.\n\n'),
-                            const TextSpan(
-                                text:
-                                    'Vous êtes ingénieur ou diplômé universitaire avec option informatique, doté d\'une première expérience significative sur un poste similaire, alors envoyez-nous votre CV à l\'adresse contact@deveo.nc'),
-                          ]),
-                    ),
-                  ],
-                )),
-                Flexible(
-                  child: Form(
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            icon: Icon(Icons.phone_android),
-                            helperText: 'Nom',
-                          ),
+                            const Icon(Icons.send)
+                          ],
                         ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            icon: Icon(Icons.phone_android),
-                            helperText: 'Prénom',
-                          ),
-                        ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            icon: Icon(Icons.mail_outline_rounded),
-                            helperText: 'Email',
-                          ),
-                        ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            icon: Icon(Icons.phone_android),
-                            helperText: 'Téléphone',
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 20, right: 20),
-                                child: Text(
-                                  'Envoyer',
-                                  style: Theme.of(context).textTheme.button,
-                                ),
-                              ),
-                              const Icon(Icons.send)
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],
