@@ -1,7 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:deveo_site_web/notifier/change_layout_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class Temoignage {
   Temoignage(this.description, this.auteur, this.titreAuteur);
@@ -13,10 +11,9 @@ class Temoignage {
 
 class BandTemoignages extends StatelessWidget {
   const BandTemoignages({Key? key}) : super(key: key);
-
   static List<Temoignage> temoignages = [
     Temoignage(
-        "En tant que chef de projet AMOA j’ai eu l’opportunité de travailler avec Deveo sur le projet BOOST, application de gestion des demandeurs et offres d’emploi incluant la gestion des Jobs d’été : application web utilisée par plus de 7000 jeunes scolarisés résidents en province Sud. Abdelkrim, David et Jean-Paul ont fait preuve d’un grand professionnalisme et d’une forte implication tout au long du projet dont les attentes étaient fortes et les délais serrés. Ils ont su développer une application de qualité tout en démontrant une grande capacité d’adaptation et de souplesse face au besoin métier évolutif. Plus que des développeurs, leurs points forts sont leur capacité d’analyse des problématiques et leur force de proposition face à celles-ci. Je suis très satisfait des prestations réalisées et n’hésiterai pas à refaire appel à Deveo pour de futurs projets.",
+        "En tant que chef de projet AMOA j’ai eu l’opportunité de travailler avec DEVEO sur le projet BOOST, application de gestion des demandeurs et offres d’emploi incluant la gestion des Jobs d’été : application web utilisée par plus de 7000 jeunes scolarisés résidents en province Sud.\n\nAbdelkrim, David et Jean-Paul ont fait preuve d’un grand professionnalisme et d’une forte implication tout au long du projet dont les attentes étaient fortes et les délais serrés. Ils ont su développer une application de qualité tout en démontrant une grande capacité d’adaptation et de souplesse face au besoin métier évolutif.\n\nPlus que des développeurs, leurs points forts sont leur capacité d’analyse des problématiques et leur force de proposition face à celles-ci. Je suis très satisfait des prestations réalisées et n’hésiterai pas à refaire appel à Deveo pour de futurs projets.",
         "Nicolas D",
         "Chef de projets AMOA"),
     Temoignage(
@@ -44,62 +41,96 @@ class BandTemoignages extends StatelessWidget {
         "Mickael H",
         "Chef du bureau SI Postal"),
     Temoignage(
-        "L'équipe de Deveo a apporté son expertise technique dans le contexte du développement d’une application de la gestion de la relation à l’usager. Ils ont montré tout au long de la mission leur engagement sur le périmètre fonctionnel et le respect des délais.\n\n Leur expérience de nos métiers, du fonctionnement de l'administration et leur capacité à initier des échanges constructifs avec les MOA ont permis de construire et d’améliorer les nouvelles fonctionnalités tout au long du développement de l’application. Leurs compétences et leur grand professionnalisme ont été une réelle plus-value pour la réussite du projet.",
+        "L'équipe de Deveo a apporté son expertise technique dans le contexte du développement d’une application de la gestion de la relation à l’usager. Ils ont montré tout au long de la mission leur engagement sur le périmètre fonctionnel et le respect des délais.\n\nLeur expérience de nos métiers, du fonctionnement de l'administration et leur capacité à initier des échanges constructifs avec les MOA ont permis de construire et d’améliorer les nouvelles fonctionnalités tout au long du développement de l’application. Leurs compétences et leur grand professionnalisme ont été une réelle plus-value pour la réussite du projet.",
         "Grégory D",
         "Chef de projet informatique MOE"),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    final CarouselController controller = CarouselController();
+    const double iconSize = 35;
+
+    return Stack(
       children: [
-        Text(
-          "Témoignages",
-          style: Theme.of(context).textTheme.headline1,
+        Column(
+          children: [
+            Text(
+              "Témoignages",
+              style: Theme.of(context).textTheme.headline1,
+            ),
+            CarouselSlider(
+              carouselController: controller,
+              options: CarouselOptions(
+                  height: 400,
+                  autoPlay: true,
+                  scrollPhysics: const NeverScrollableScrollPhysics(),
+                  enlargeCenterPage: true,
+                  pageSnapping: true,
+                  autoPlayInterval: const Duration(seconds: 5)),
+              items: temoignages.map((i) {
+                return Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  elevation: 5,
+                  shadowColor: Theme.of(context).colorScheme.primary,
+                  child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            i.description,
+                            textAlign: TextAlign.justify,
+                            style:
+                                Theme.of(context).textTheme.bodyText2!.copyWith(
+                                      fontStyle: FontStyle.italic,
+                                      color: Colors.black54,
+                                    ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          child: Text(
+                            "${i.auteur} - ${i.titreAuteur}",
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
         ),
-        CarouselSlider(
-          options: CarouselOptions(
-            height: 450,
-            autoPlay: true,
-            scrollPhysics: const NeverScrollableScrollPhysics(),
-            enlargeCenterPage: true,
-            pageSnapping: true,
+        Positioned(
+          left: 50,
+          top: 0,
+          bottom: 0,
+          child: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              size: iconSize,
+              color: Colors.black54,
+            ),
+            onPressed: () => controller.previousPage(),
           ),
-          items: temoignages.map((i) {
-            return Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              elevation: 5,
-              shadowColor: Theme.of(context).colorScheme.primary,
-              child: Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        i.description,
-                        textAlign: TextAlign.justify,
-                        style:
-                            Theme.of(context).textTheme.bodyText2!.copyWith(
-                                  fontStyle: FontStyle.italic,
-                                  color: Colors.black54,
-                                ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      child: Text(
-                        "${i.auteur} - ${i.titreAuteur}",
-                        style: Theme.of(context).textTheme.subtitle1,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }).toList(),
+        ),
+        Positioned(
+          right: 50,
+          top: 0,
+          bottom: 0,
+          child: IconButton(
+            icon: const Icon(
+              Icons.arrow_forward,
+              size: iconSize,
+              color: Colors.black54,
+            ),
+            onPressed: () => controller.nextPage(),
+          ),
         ),
       ],
     );

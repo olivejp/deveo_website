@@ -33,11 +33,10 @@ class BandAPropos extends StatelessWidget {
           builder: (context, value, child) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 if ([Layout.medium, Layout.large, Layout.xlarge]
                     .contains(value.layoutSize))
-                  Flexible(
+                  Expanded(
                     flex: 1,
                     child: Container(
                       margin: const EdgeInsets.only(
@@ -54,7 +53,7 @@ class BandAPropos extends StatelessWidget {
                       ),
                     ),
                   ),
-                Flexible(
+                Expanded(
                   flex: 2,
                   child: child!,
                 ),
