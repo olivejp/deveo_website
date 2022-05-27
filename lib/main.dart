@@ -133,7 +133,12 @@ class MyHomePage extends StatelessWidget {
                     valueListenable: _valueScrollIndicator,
                     builder: (context, value, child) {
                       return DotsIndicator(
-                        onTap: (position) => context.read<OnCandidateClikNotifier>().scroll(position.toInt()),
+                        onTap: (position) {
+                          print('Ma position : $position');
+                          context
+                              .read<OnCandidateClikNotifier>()
+                              .scroll(position.toInt());
+                        },
                         axis: Axis.vertical,
                         dotsCount: 6,
                         position: value,

@@ -21,15 +21,15 @@ class BandTemoignages extends StatelessWidget {
         "Yann C",
         "Chef de projets AMOA"),
     Temoignage(
-        "Nous avons fait appel à Deveo pour développer ALOHA, notre application de gestion de la relation à l’usager. David a fait preuve d’une grande écoute et a été force de propositions pour nous suggérer des fonctionnalités toujours plus en phase avec notre besoin. Son efficacité et sa grande conscience professionnelle nous ont permis d’avancer rapidement et de tenir les délais fixés. Enfin, sa bonne humeur a rendu ce projet encore plus stimulant. Cette collaboration est un véritable succès, je n’ai relevé que des points positifs !",
+        "Nous avons fait appel à Deveo pour développer ALOHA, notre application de gestion de la relation à l’usager. David a fait preuve d’une grande écoute et a été force de propositions pour nous suggérer des fonctionnalités toujours plus en phase avec notre besoin.\n\nSon efficacité et sa grande conscience professionnelle nous ont permis d’avancer rapidement et de tenir les délais fixés. Enfin, sa bonne humeur a rendu ce projet encore plus stimulant. Cette collaboration est un véritable succès, je n’ai relevé que des points positifs !",
         "Catherine B",
         "Chargée de projets"),
     Temoignage(
-        "J'ai découvert la société Deveo pour la réalisation du projet OCMC. Ce projet fut réalisé avec succès, dans les délais prévus initialement. J'apprécie les compétences techniques d'Abdelkrim. C'est un développeur à l'écoute des besoins et toujours force de propositions. En plus il fait très bien le café et ses blagues pourries du matin sont particulièrement appréciables, Merci à toi Abdelkrim",
+        "J'ai découvert la société Deveo pour la réalisation du projet OCMC. Ce projet fut réalisé avec succès, dans les délais prévus initialement.\n\nJ'apprécie les compétences techniques d'Abdelkrim. C'est un développeur à l'écoute des besoins et toujours force de propositions. En plus il fait très bien le café et ses blagues pourries du matin sont particulièrement appréciables, Merci à toi Abdelkrim",
         "Hugo R",
         "Chef de projet SIG"),
     Temoignage(
-        "La méthode agile était une première pour moi, j’avais de l’appréhension, mais celle-ci s’est très vite évaporée car les développeurs ont su me rassurer et me guider dans la démarche. Tout au long du projet, ils ont été force de proposition afin d’optimiser le système, le rendre plus fiable et plus intuitif. Toujours à l’écoute, patients, efficaces et très professionnels. Le projet s’est déroulé dans une très bonne ambiance ce qui a contribué à son succès.",
+        "La méthode agile était une première pour moi, j’avais de l’appréhension, mais celle-ci s’est très vite évaporée car les développeurs ont su me rassurer et me guider dans la démarche.\n\nTout au long du projet, ils ont été force de proposition afin d’optimiser le système, le rendre plus fiable et plus intuitif. Toujours à l’écoute, patients, efficaces et très professionnels. Le projet s’est déroulé dans une très bonne ambiance ce qui a contribué à son succès.",
         "Fabienne H",
         "Chef de bureau facturation"),
     Temoignage(
@@ -62,43 +62,60 @@ class BandTemoignages extends StatelessWidget {
             CarouselSlider(
               carouselController: controller,
               options: CarouselOptions(
-                  height: 400,
+                  height: 450,
                   autoPlay: true,
                   scrollPhysics: const NeverScrollableScrollPhysics(),
                   enlargeCenterPage: true,
                   pageSnapping: true,
                   autoPlayInterval: const Duration(seconds: 5)),
               items: temoignages.map((i) {
-                return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                return ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 1200,
+                    minWidth: 500,
                   ),
-                  elevation: 5,
-                  shadowColor: Theme.of(context).colorScheme.primary,
-                  child: Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            i.description,
-                            textAlign: TextAlign.justify,
-                            style:
-                                Theme.of(context).textTheme.bodyText2!.copyWith(
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    elevation: 5,
+                    shadowColor: Theme.of(context).colorScheme.primary,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 30,
+                        bottom: 30,
+                        left: 50,
+                        right: 50,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Center(
+                              child: Text(
+                                i.description,
+                                overflow: TextOverflow.fade,
+                                textAlign: TextAlign.justify,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(
                                       fontStyle: FontStyle.italic,
                                       color: Colors.black54,
                                     ),
+                              ),
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: Text(
-                            "${i.auteur} - ${i.titreAuteur}",
-                            style: Theme.of(context).textTheme.subtitle1,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            child: Text(
+                              "${i.auteur} - ${i.titreAuteur}",
+                              style: Theme.of(context).textTheme.subtitle1,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );

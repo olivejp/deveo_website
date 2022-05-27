@@ -44,6 +44,7 @@ class BandCompetenceCard extends StatelessWidget {
               Text(
                 description,
                 style: Theme.of(context).textTheme.bodyText2,
+                textAlign: TextAlign.justify,
               ),
             ],
           ),

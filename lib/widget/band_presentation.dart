@@ -1,5 +1,6 @@
 import 'package:deveo_site_web/notifier/change_layout_notifier.dart';
 import 'package:deveo_site_web/notifier/on_candidate_clik_notifier.dart';
+import 'package:deveo_site_web/painter/arc_paint.dart';
 import 'package:deveo_site_web/painter/circle_draw.dart';
 import 'package:deveo_site_web/widget/layout_horizontal_padding.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,11 @@ class _BandPresentationState extends State<BandPresentation>
             children: [
               Positioned.fill(
                 child: Container(),
+              ),
+              Positioned.fill(
+                left: 0,
+                right: 0,
+                child: Arc(),
               ),
               Positioned.fill(
                 left: _animation!.value,
@@ -189,6 +195,17 @@ class Circle extends StatelessWidget {
         radius: radius,
         color: color,
       ),
+    );
+  }
+}
+
+class Arc extends StatelessWidget {
+  const Arc({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: ArcPaint(color: Colors.amberAccent),
     );
   }
 }

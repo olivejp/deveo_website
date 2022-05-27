@@ -31,7 +31,7 @@ class BandResources extends StatelessWidget {
             description: "Premier employé et premier associé de DEVEO.",
           ),
           BandResourceCard(
-            assetImage: "assets/jp.png",
+            assetImage: "assets/jp.jpeg",
             nom: parser.emojify("Jean Paul OLIVE :olive:"),
             description: "Troisième et dernier associé de DEVEO.",
           ),
