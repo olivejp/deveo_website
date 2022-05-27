@@ -6,16 +6,20 @@ class ThemeDataUtils {
     return ThemeData(
       primarySwatch: Colors.purple,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.deepPurpleAccent,
-        primary: Colors.deepPurple,
-        secondary: Colors.greenAccent,
-        tertiary: Colors.amberAccent
+          seedColor: Colors.deepPurpleAccent,
+          primary: Colors.deepPurple,
+          secondary: Colors.greenAccent,
+          tertiary: Colors.amberAccent
       ),
       textTheme: TextTheme(
         button: GoogleFonts.roboto(
           fontWeight: FontWeight.w800,
           fontSize: 18,
           color: Color(Colors.white.value),
+        ),
+        caption: GoogleFonts.roboto(
+            fontWeight: FontWeight.w300,
+            fontSize: 15
         ),
         bodyText1: GoogleFonts.roboto(
           fontWeight: FontWeight.w800,
