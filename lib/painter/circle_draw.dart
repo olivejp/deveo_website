@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 
 class CircleDraw extends CustomPainter {
-  CircleDraw({required this.radius, required this.color});
+  CircleDraw({
+    required this.color,
+    required this.radius,
+    this.strokeWidth = 10,
+  });
 
   final double radius;
   final Color color;
+  final double? strokeWidth;
 
   @override
   void paint(Canvas canvas, Size size) {
-    var paint1 = Paint()
+    var paint = Paint()
       ..color = color
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 10;
-    canvas.drawCircle(Offset(0 + radius, 0 + radius), radius, paint1);
+      ..strokeWidth = strokeWidth!;
+    canvas.drawCircle(Offset(0 + radius, 0 + radius), radius, paint);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
+  bool shouldRepaint(covariant CircleDraw oldDelegate) {
+    return oldDelegate.color != color ||
+        oldDelegate.strokeWidth != strokeWidth ||
+        oldDelegate.radius != radius;
   }
 }

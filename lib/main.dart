@@ -75,7 +75,7 @@ class MyHomePage extends StatelessWidget {
         return false;
       },
       child: ChangeNotifierProvider(
-        create: (BuildContext context) => OnCandidateClikNotifier([
+        create: (BuildContext context) => OnStepClikNotifier([
           presentationKey,
           competencesKey,
           aProposKey,
@@ -116,7 +116,7 @@ class MyHomePage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const Positioned(
+                      Positioned(
                         top: 0,
                         left: 0,
                         right: 0,
@@ -136,7 +136,7 @@ class MyHomePage extends StatelessWidget {
                         onTap: (position) {
                           print('Ma position : $position');
                           context
-                              .read<OnCandidateClikNotifier>()
+                              .read<OnStepClikNotifier>()
                               .scroll(position.toInt());
                         },
                         axis: Axis.vertical,

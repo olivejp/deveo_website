@@ -1,5 +1,6 @@
 import 'package:deveo_site_web/widget/layout_horizontal_padding.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BandCandidater extends StatelessWidget {
   const BandCandidater({Key? key}) : super(key: key);
@@ -90,9 +91,10 @@ class BandCandidater extends StatelessWidget {
                               },
                               style: Theme.of(context).textTheme.caption,
                               decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  icon: Icon(Icons.person),
-                                  labelText: 'Nom'),
+                                border: OutlineInputBorder(),
+                                icon: Icon(Icons.person),
+                                labelText: 'Nom',
+                              ),
                             ),
                             TextFormField(
                               autovalidateMode:
@@ -138,8 +140,11 @@ class BandCandidater extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Padding(
-                                      padding:
-                                          EdgeInsets.only(left: 20, right: 20),
+                                      padding: EdgeInsets.only(
+                                          top: 10,
+                                          bottom: 10,
+                                          left: 20,
+                                          right: 20),
                                       child: Text(
                                         'Envoyer',
                                       ),
