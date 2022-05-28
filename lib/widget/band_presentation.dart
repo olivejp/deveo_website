@@ -49,7 +49,7 @@ class _BandPresentationState extends State<BandPresentation>
               Positioned.fill(
                 child: Container(),
               ),
-              Positioned.fill(
+              const Positioned.fill(
                 left: 0,
                 right: 0,
                 child: Arc(),
@@ -149,7 +149,7 @@ class _BandPresentationState extends State<BandPresentation>
                           }),
                         ),
                         onPressed: () =>
-                            context.read<OnCandidateClikNotifier>().scroll(4),
+                            context.read<OnStepClikNotifier>().scroll(4),
                         child: Padding(
                           padding: const EdgeInsets.only(
                               top: 18.0, bottom: 18.0, left: 25.0, right: 25.0),
@@ -183,10 +183,16 @@ class _BandPresentationState extends State<BandPresentation>
 }
 
 class Circle extends StatelessWidget {
-  const Circle({Key? key, required this.radius, required this.color})
-      : super(key: key);
+  const Circle({
+    Key? key,
+    required this.radius,
+    required this.color,
+    this.strokeWidth,
+  }) : super(key: key);
+
   final double radius;
   final Color color;
+  final double? strokeWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -194,6 +200,7 @@ class Circle extends StatelessWidget {
       painter: CircleDraw(
         radius: radius,
         color: color,
+        strokeWidth: strokeWidth,
       ),
     );
   }

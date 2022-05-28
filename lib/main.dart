@@ -76,9 +76,14 @@ class MyHomePage extends StatelessWidget {
         return false;
       },
       child: ChangeNotifierProvider(
-        create: (BuildContext context) => OnCandidateClikNotifier(
-            [presentationKey, competencesKey, aProposKey, temoignagesKey, candidaterKey, resourcesKey],
-            _scrollController),
+        create: (BuildContext context) => OnStepClikNotifier([
+          presentationKey,
+          competencesKey,
+          aProposKey,
+          temoignagesKey,
+          candidaterKey,
+          resourcesKey
+        ], _scrollController),
         child: MultiNotifier(
           child: Scaffold(
             body: Stack(
@@ -112,7 +117,7 @@ class MyHomePage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const Positioned(
+                      Positioned(
                         top: 0,
                         left: 0,
                         right: 0,
@@ -168,7 +173,9 @@ class MyHomePage extends StatelessWidget {
                       return DotsIndicator(
                         onTap: (position) {
                           print('Ma position : $position');
-                          context.read<OnCandidateClikNotifier>().scroll(position.toInt());
+                          context
+                              .read<OnStepClikNotifier>()
+                              .scroll(position.toInt());
                         },
                         axis: Axis.vertical,
                         dotsCount: 6,
