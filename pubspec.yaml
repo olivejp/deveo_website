@@ -40,6 +40,7 @@ dependencies:
   dots_indicator: ^2.1.0
   visibility_detector: ^0.3.3
   carousel_slider: ^4.1.1
+  flutter_svg: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +72,7 @@ flutter:
     - assets/david.jpeg
     - assets/computer_image.jpeg
     - assets/developper_group.jpeg
+    - assets/krimo.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

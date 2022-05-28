@@ -20,11 +20,11 @@ class BandResources extends StatelessWidget {
         spacing: 15,
         runSpacing: 15,
         children: [
-          const BandResourceCard(
-            assetImage: "assets/krimo.jpeg",
-            nom: "Abdelkrim RAIS",
-            description: "Fondateur de la société.",
-          ),
+          // const BandResourceCard(
+          //   assetImage: "assets/krimo_retouche.png",
+          //   nom: "Abdelkrim RAIS",
+          //   description: "Fondateur de la société.",
+          // ),
           const BandResourceCard(
             assetImage: "assets/david.jpeg",
             nom: "David BROUSTE",

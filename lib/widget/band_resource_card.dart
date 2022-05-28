@@ -4,11 +4,7 @@ import 'package:provider/provider.dart';
 
 class BandResourceCard extends StatefulWidget {
   const BandResourceCard(
-      {Key? key,
-      this.radius = 20,
-      required this.assetImage,
-      required this.nom,
-      required this.description})
+      {Key? key, this.radius = 20, required this.assetImage, required this.nom, required this.description})
       : super(key: key);
 
   final double radius;
@@ -24,8 +20,7 @@ class BandResourceCard extends StatefulWidget {
   }
 }
 
-class _BandResourceCardState extends State<BandResourceCard>
-    with SingleTickerProviderStateMixin {
+class _BandResourceCardState extends State<BandResourceCard> with SingleTickerProviderStateMixin {
   AnimationController? _controller;
   Animation<double>? _animation;
 
@@ -101,9 +96,9 @@ class _BandResourceCardState extends State<BandResourceCard>
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                              top: (widget.heightSizedBox / 4) -
-                                  widget.circleAvatarRadius,
-                              bottom: 20),
+                            top: (widget.heightSizedBox / 4) - widget.circleAvatarRadius,
+                            bottom: 20,
+                          ),
                           child: CircleAvatar(
                             foregroundImage: AssetImage(widget.assetImage),
                             radius: widget.circleAvatarRadius,
