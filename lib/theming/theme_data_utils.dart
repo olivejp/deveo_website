@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ThemeDataUtils {
+  static double elevation = 2;
+
   static ThemeData getThemeData() {
     return ThemeData(
       primarySwatch: Colors.purple,

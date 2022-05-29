@@ -47,6 +47,7 @@ class ResourceAvatarSvg extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(roundnessFactor),
+                  bottomLeft: Radius.circular(roundnessFactor),
                 ),
               ),
               child: Padding(

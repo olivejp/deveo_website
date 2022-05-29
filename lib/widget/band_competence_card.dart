@@ -1,11 +1,8 @@
+import 'package:deveo_site_web/theming/theme_data_utils.dart';
 import 'package:flutter/material.dart';
 
 class BandCompetenceCard extends StatelessWidget {
-  const BandCompetenceCard(
-      {Key? key,
-      required this.icon,
-      required this.title,
-      required this.description})
+  const BandCompetenceCard({Key? key, required this.icon, required this.title, required this.description})
       : super(key: key);
   final IconData icon;
   final String title;
@@ -17,11 +14,11 @@ class BandCompetenceCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      elevation: 0.5,
+      elevation: ThemeDataUtils.elevation,
       shadowColor: Theme.of(context).colorScheme.primary,
       child: ConstrainedBox(
         constraints: const BoxConstraints(
-          maxWidth: 500,
+          maxWidth: 400,
           minWidth: 200,
         ),
         child: Padding(

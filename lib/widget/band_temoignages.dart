@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:deveo_site_web/theming/theme_data_utils.dart';
 import 'package:flutter/material.dart';
 
 class Temoignage {
@@ -83,7 +84,7 @@ class BandTemoignages extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    elevation: 5,
+                    elevation: ThemeDataUtils.elevation,
                     shadowColor: Theme.of(context).colorScheme.primary,
                     child: Padding(
                       padding: const EdgeInsets.only(

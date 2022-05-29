@@ -75,16 +75,17 @@ class MyHomePage extends StatelessWidget {
         return false;
       },
       child: ChangeNotifierProvider(
-        create: (BuildContext context) => OnStepClikNotifier([
-          presentationKey,
-          competencesKey,
-          aProposKey,
-          temoignagesKey,
-          candidaterKey,
-          resourcesKey
-        ], _scrollController),
+        create: (BuildContext context) => OnStepClikNotifier(
+            [presentationKey, competencesKey, aProposKey, temoignagesKey, candidaterKey, resourcesKey],
+            _scrollController),
         child: MultiNotifier(
           child: Scaffold(
+            appBar: AppBar(
+              title: const MainAppBar(),
+              centerTitle: true,
+              elevation: 1,
+              titleSpacing: 0,
+            ),
             body: Stack(
               children: [
                 SingleChildScrollView(
@@ -125,9 +126,7 @@ class MyHomePage extends StatelessWidget {
                       return DotsIndicator(
                         onTap: (position) {
                           print('Ma position : $position');
-                          context
-                              .read<OnStepClikNotifier>()
-                              .scroll(position.toInt());
+                          context.read<OnStepClikNotifier>().scroll(position.toInt());
                         },
                         axis: Axis.vertical,
                         dotsCount: 6,
@@ -140,12 +139,6 @@ class MyHomePage extends StatelessWidget {
                     },
                   ),
                 ),
-                const Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: MainAppBar(),
-                )
               ],
             ),
           ),

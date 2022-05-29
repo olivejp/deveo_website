@@ -4,6 +4,7 @@ import 'package:deveo_site_web/painter/arc_paint.dart';
 import 'package:deveo_site_web/painter/circle_draw.dart';
 import 'package:deveo_site_web/widget/layout_horizontal_padding.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class BandPresentation extends StatefulWidget {
@@ -13,8 +14,7 @@ class BandPresentation extends StatefulWidget {
   State<BandPresentation> createState() => _BandPresentationState();
 }
 
-class _BandPresentationState extends State<BandPresentation>
-    with SingleTickerProviderStateMixin {
+class _BandPresentationState extends State<BandPresentation> with SingleTickerProviderStateMixin {
   AnimationController? _controller;
   Animation<double>? _animation;
 
@@ -64,8 +64,7 @@ class _BandPresentationState extends State<BandPresentation>
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Consumer<ChangeLayoutNotifier>(
-                        builder: (context, value, child) {
+                    Consumer<ChangeLayoutNotifier>(builder: (context, value, child) {
                       double fontSize = 30;
                       switch (value.layoutSize) {
                         case Layout.xlarge:
@@ -92,16 +91,51 @@ class _BandPresentationState extends State<BandPresentation>
                               children: [
                                 Text(
                                   'DEVEO, une équipe de professionnels',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline1!
-                                      .copyWith(fontSize: fontSize),
+                                  style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: fontSize),
                                 ),
+                                Row(
+                                  children: const [
+                                    TechnologyIcon(
+                                      icon: FontAwesomeIcons.java,
+                                      tooltip: 'Java',
+                                      endColor: Colors.red,
+                                    ),
+                                    TechnologyIcon(
+                                      icon: FontAwesomeIcons.js,
+                                      tooltip: 'Javascript',
+                                      endColor: Colors.red,
+                                    ),
+                                    TechnologyIcon(
+                                      icon: FontAwesomeIcons.leaf,
+                                      tooltip: 'Springboot',
+                                      endColor: Colors.green,
+                                    ),
+                                    TechnologyIcon(
+                                      icon: FontAwesomeIcons.angular,
+                                      tooltip: 'Angular',
+                                      endColor: Colors.red,
+                                    ),
+                                    TechnologyIcon(
+                                      icon: FontAwesomeIcons.git,
+                                      tooltip: 'Git',
+                                      endColor: Colors.red,
+                                    ),
+                                    TechnologyIcon(
+                                      icon: FontAwesomeIcons.html5,
+                                      tooltip: 'Html 5',
+                                      endColor: Colors.blue,
+                                    ),
+                                    TechnologyIcon(
+                                      icon: FontAwesomeIcons.css3,
+                                      tooltip: 'CSS 3',
+                                      endColor: Colors.orange,
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
                           ),
-                          if ([Layout.medium, Layout.large, Layout.xlarge]
-                              .contains(value.layoutSize))
+                          if ([Layout.medium, Layout.large, Layout.xlarge].contains(value.layoutSize))
                             Flexible(
                               flex: 1,
                               child: Container(
@@ -110,8 +144,7 @@ class _BandPresentationState extends State<BandPresentation>
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
-                                child:
-                                    Image.asset('assets/computer_image.jpeg'),
+                                child: Image.asset('assets/computer_image.jpeg'),
                               ),
                             )
                         ],
@@ -121,35 +154,29 @@ class _BandPresentationState extends State<BandPresentation>
                       padding: const EdgeInsets.only(top: 75),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all(const StadiumBorder()),
-                          elevation:
-                              MaterialStateProperty.resolveWith((states) {
+                          shape: MaterialStateProperty.all(const StadiumBorder()),
+                          elevation: MaterialStateProperty.resolveWith((states) {
                             if (states.contains(MaterialState.hovered)) {
                               return 20;
                             }
                             return 5;
                           }),
-                          shadowColor:
-                              MaterialStateProperty.resolveWith((states) {
+                          shadowColor: MaterialStateProperty.resolveWith((states) {
                             if (states.contains(MaterialState.hovered)) {
                               return Theme.of(context).colorScheme.secondary;
                             }
                             return Colors.grey;
                           }),
                         ),
-                        onPressed: () =>
-                            context.read<OnStepClikNotifier>().scroll(4),
+                        onPressed: () => context.read<OnStepClikNotifier>().scroll(4),
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 18.0, bottom: 18.0, left: 25.0, right: 25.0),
+                          padding: const EdgeInsets.only(top: 18.0, bottom: 18.0, left: 25.0, right: 25.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 20, right: 20),
+                                padding: const EdgeInsets.only(left: 20, right: 20),
                                 child: Text(
                                   'Candidater',
                                   style: Theme.of(context).textTheme.button,
@@ -168,6 +195,63 @@ class _BandPresentationState extends State<BandPresentation>
           );
         },
       ),
+    );
+  }
+}
+
+class TechnologyIcon extends StatefulWidget {
+  const TechnologyIcon({
+    Key? key,
+    this.defaultColor = Colors.grey,
+    this.iconSize = 50,
+    required this.tooltip,
+    required this.icon,
+    required this.endColor,
+  }) : super(key: key);
+
+  final String tooltip;
+  final IconData icon;
+  final Color defaultColor;
+  final Color endColor;
+  final double iconSize;
+
+  @override
+  State<TechnologyIcon> createState() => _TechnologyIconState();
+}
+
+class _TechnologyIconState extends State<TechnologyIcon> {
+  final ValueNotifier<bool> hovered = ValueNotifier(false);
+
+  @override
+  Widget build(BuildContext context) {
+    final Color endColor = widget.defaultColor;
+    return MouseRegion(
+      onHover: (event) => hovered.value = true,
+      onExit: (event) => hovered.value = false,
+      child: ValueListenableBuilder<bool>(
+          valueListenable: hovered,
+          builder: (context, isHover, child) {
+            return TweenAnimationBuilder(
+              tween: ColorTween(
+                begin: endColor,
+                end: isHover ? widget.endColor : endColor,
+              ),
+              duration: const Duration(milliseconds: 500),
+              builder: (_, Color? color, __) {
+                return Tooltip(
+                  message: widget.tooltip,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FaIcon(
+                      widget.icon,
+                      size: widget.iconSize,
+                      color: color,
+                    ),
+                  ),
+                );
+              },
+            );
+          }),
     );
   }
 }
