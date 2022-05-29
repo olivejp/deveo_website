@@ -11,7 +11,6 @@ import 'package:deveo_site_web/widget/layout_notifier.dart';
 import 'package:deveo_site_web/widget/main_appbar.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -53,11 +52,11 @@ class MyHomePage extends StatelessWidget {
           final double candidaterY = Utils.getYPosition(candidaterKey);
           final double resourceY = Utils.getYPosition(resourcesKey);
 
-          final double competenceHeight = Utils.getHeight(competencesKey);
-          final double aProposHeight = Utils.getHeight(aProposKey);
-          final double temoignagesHeight = Utils.getHeight(temoignagesKey);
-          final double candidaterHeight = Utils.getHeight(candidaterKey);
-          final double resourceHeight = Utils.getHeight(resourcesKey);
+          final double competenceHeight = Utils.getHeight(competencesKey) ?? 0;
+          final double aProposHeight = Utils.getHeight(aProposKey) ?? 0;
+          final double temoignagesHeight = Utils.getHeight(temoignagesKey) ?? 0;
+          final double candidaterHeight = Utils.getHeight(candidaterKey) ?? 0;
+          final double resourceHeight = Utils.getHeight(resourcesKey) ?? 0;
 
           if (resourceY < resourceHeight / 2) {
             _valueScrollIndicator.value = 5;
@@ -90,77 +89,30 @@ class MyHomePage extends StatelessWidget {
               children: [
                 SingleChildScrollView(
                   controller: _scrollController,
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 50),
-                        child: Column(
-                          children: [
-                            BandPresentation(
-                              key: presentationKey,
-                            ),
-                            BandCompetences(
-                              key: competencesKey,
-                            ),
-                            BandAPropos(
-                              key: aProposKey,
-                            ),
-                            BandTemoignages(
-                              key: temoignagesKey,
-                            ),
-                            BandCandidater(
-                              key: candidaterKey,
-                            ),
-                            BandResources(
-                              key: resourcesKey,
-                            )
-                          ],
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 50),
+                    child: Column(
+                      children: [
+                        BandPresentation(
+                          key: presentationKey,
                         ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        child: MainAppBar(),
-                      ),
-                      SizedBox(
-                        height: 580,
-                        child: AspectRatio(
-                          aspectRatio:  320 / 580,
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              ClipPath(
-                                clipper: MyCustomClipper(),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.amber,
-                                    gradient: const LinearGradient(
-                                      colors: [
-                                        Colors.deepOrange,
-                                        Colors.amber,
-                                        Colors.amberAccent,
-                                      ],
-                                      stops: [0, 0.5, 0.6],
-                                      begin: Alignment.bottomCenter,
-                                      end: Alignment.topCenter,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                child: SvgPicture.asset(
-                                  "assets/krimo.svg",
-                                  fit: BoxFit.contain,
-                                  alignment: Alignment.center,
-                                ),
-                              ),
-                            ],
-                          ),
+                        BandCompetences(
+                          key: competencesKey,
                         ),
-                      ),
-                    ],
+                        BandAPropos(
+                          key: aProposKey,
+                        ),
+                        BandTemoignages(
+                          key: temoignagesKey,
+                        ),
+                        BandCandidater(
+                          key: candidaterKey,
+                        ),
+                        BandResources(
+                          key: resourcesKey,
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Positioned(
@@ -188,42 +140,17 @@ class MyHomePage extends StatelessWidget {
                     },
                   ),
                 ),
+                const Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: MainAppBar(),
+                )
               ],
             ),
           ),
         ),
       ),
     );
-  }
-}
-
-class MyCustomClipper extends CustomClipper<Path> {
-  final double heightFactor = 0.2;
-  final double roundnessFactor = 50.0;
-
-  @override
-  Path getClip(Size size) {
-    final Path path = Path();
-    path.moveTo(0, size.height * 0.33);
-    path.lineTo(0, size.height - roundnessFactor);
-    path.quadraticBezierTo(0, size.height, roundnessFactor, size.height);
-    path.lineTo(size.width - roundnessFactor, size.height);
-    path.quadraticBezierTo(size.width, size.height, size.width, size.height - roundnessFactor);
-    path.lineTo(size.width, roundnessFactor * 2);
-    path.quadraticBezierTo(size.width, 0, size.width - roundnessFactor * 3, roundnessFactor * 2);
-    path.lineTo(roundnessFactor, size.height * 0.33 + 10);
-    path.quadraticBezierTo(0, size.height * 0.33 + roundnessFactor, 0, size.height * 0.33 + roundnessFactor * 2);
-    // path.moveTo(0, size.height * 0.3);
-    // path.quadraticBezierTo(size.width * 0.25, size.height * 0.25, size.width * 0.5, size.height * 0.3);
-    // path.quadraticBezierTo(size.width * 0.75, size.height * 0.35, size.width, size.height * 0.3);
-    // path.lineTo(size.width, size.height);
-    // path.lineTo(0, size.height);
-    // path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return false;
   }
 }

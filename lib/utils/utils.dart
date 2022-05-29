@@ -7,8 +7,13 @@ class Utils {
     return offset.dy;
   }
 
-  static double getHeight(GlobalKey key) {
-    final RenderBox box = key.currentContext?.findRenderObject() as RenderBox;
-    return box.size.height;
+  static double? getHeight(GlobalKey key) {
+    final RenderBox? box = key.currentContext?.findRenderObject() as RenderBox?;
+    return box?.size.height;
+  }
+
+  static double? getWidth(GlobalKey key) {
+    final RenderBox? box = key.currentContext?.findRenderObject() as RenderBox?;
+    return box?.size.width;
   }
 }

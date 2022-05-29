@@ -46,20 +46,10 @@ class _BandPresentationState extends State<BandPresentation>
         builder: (context, child) {
           return Stack(
             children: [
-              Positioned.fill(
-                child: Container(),
-              ),
               const Positioned.fill(
                 left: 0,
                 right: 0,
                 child: Arc(),
-              ),
-              Positioned.fill(
-                left: _animation!.value,
-                child: Circle(
-                  color: Theme.of(context).colorScheme.tertiary,
-                  radius: 25,
-                ),
               ),
               Positioned(
                 top: 100,
@@ -200,7 +190,6 @@ class Circle extends StatelessWidget {
       painter: CircleDraw(
         radius: radius,
         color: color,
-        strokeWidth: strokeWidth,
       ),
     );
   }

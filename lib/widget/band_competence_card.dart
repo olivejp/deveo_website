@@ -17,7 +17,7 @@ class BandCompetenceCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      elevation: 5,
+      elevation: 0.5,
       shadowColor: Theme.of(context).colorScheme.primary,
       child: ConstrainedBox(
         constraints: const BoxConstraints(

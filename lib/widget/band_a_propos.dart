@@ -40,7 +40,6 @@ class BandAPropos extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       margin: const EdgeInsets.only(
-                        left: 20,
                         right: 20,
                       ),
                       clipBehavior: Clip.antiAlias,

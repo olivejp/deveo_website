@@ -55,9 +55,14 @@ class BandTemoignages extends StatelessWidget {
       children: [
         Column(
           children: [
-            Text(
-              "Témoignages",
-              style: Theme.of(context).textTheme.headline1,
+            Padding(
+              padding: const EdgeInsets.only(
+                bottom: 20,
+              ),
+              child: Text(
+                'Témoignages',
+                style: Theme.of(context).textTheme.headline1,
+              ),
             ),
             CarouselSlider(
               carouselController: controller,

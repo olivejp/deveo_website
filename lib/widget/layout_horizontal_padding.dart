@@ -17,7 +17,7 @@ class LayoutHorizontalPadding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ChangeLayoutNotifier>(
       builder: (_, value, child) {
-        double padding = 60;
+        double padding = 20;
         switch (value.layoutSize) {
           case Layout.xlarge:
             padding = 200;
@@ -26,10 +26,10 @@ class LayoutHorizontalPadding extends StatelessWidget {
             padding = 150;
             break;
           case Layout.medium:
-            padding = 80;
+            padding = 100;
             break;
           case Layout.small:
-            padding = 40;
+            padding = 20;
             break;
         }
         return Padding(
