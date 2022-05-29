@@ -25,7 +25,19 @@ class BandResources extends StatelessWidget {
             runSpacing: 15,
             children: const [
               ResourceAvatarSvg(
-                padding: 20,
+                padding: EdgeInsets.only(left: 20),
+                roundnessFactor: 25,
+                height: 300,
+                colors: [
+                  Colors.green,
+                  Colors.lightGreen,
+                  Colors.lightGreenAccent,
+                ],
+                stops: [0, 0.5, 0.6],
+                svgAsset: 'assets/jp_retouche.svg',
+              ),
+              ResourceAvatarSvg(
+                padding: EdgeInsets.all(20),
                 roundnessFactor: 25,
                 height: 300,
                 colors: [
@@ -35,6 +47,18 @@ class BandResources extends StatelessWidget {
                 ],
                 stops: [0, 0.5, 0.6],
                 svgAsset: 'assets/krimo.svg',
+              ),
+              ResourceAvatarSvg(
+                padding: EdgeInsets.only(right: 20),
+                roundnessFactor: 25,
+                height: 300,
+                colors: [
+                  Colors.deepPurple,
+                  Colors.purple,
+                  Colors.purpleAccent,
+                ],
+                stops: [0, 0.5, 0.6],
+                svgAsset: 'assets/david_retouche.svg',
               ),
             ],
           ),

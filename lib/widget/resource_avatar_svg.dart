@@ -17,7 +17,7 @@ class ResourceAvatarSvg extends StatelessWidget {
   final double height;
   final List<Color> colors;
   final List<double>? stops;
-  final double padding;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +42,20 @@ class ResourceAvatarSvg extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(padding),
-              child: SvgPicture.asset(
-                svgAsset,
-                fit: BoxFit.contain,
-                alignment: Alignment.center,
+            Container(
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(roundnessFactor),
+                ),
+              ),
+              child: Padding(
+                padding: padding,
+                child: SvgPicture.asset(
+                  svgAsset,
+                  fit: BoxFit.contain,
+                  alignment: Alignment.bottomRight,
+                ),
               ),
             ),
           ],
@@ -70,14 +78,11 @@ class MyCustomClipper extends CustomClipper<Path> {
     path.lineTo(0, size.height - roundnessFactor);
     path.quadraticBezierTo(0, size.height, roundnessFactor, size.height);
     path.lineTo(size.width - roundnessFactor, size.height);
-    path.quadraticBezierTo(
-        size.width, size.height, size.width, size.height - roundnessFactor);
+    path.quadraticBezierTo(size.width, size.height, size.width, size.height - roundnessFactor);
     path.lineTo(size.width, roundnessFactor * 2);
-    path.quadraticBezierTo(
-        size.width, 0, size.width - roundnessFactor * 3, roundnessFactor * 2);
+    path.quadraticBezierTo(size.width, 0, size.width - roundnessFactor * 3, roundnessFactor * 2);
     path.lineTo(roundnessFactor, size.height * 0.33 + 10);
-    path.quadraticBezierTo(0, size.height * 0.33 + roundnessFactor, 0,
-        size.height * 0.33 + roundnessFactor * 2);
+    path.quadraticBezierTo(0, size.height * 0.33 + roundnessFactor, 0, size.height * 0.33 + roundnessFactor * 2);
     // path.moveTo(0, size.height * 0.3);
     // path.quadraticBezierTo(size.width * 0.25, size.height * 0.25, size.width * 0.5, size.height * 0.3);
     // path.quadraticBezierTo(size.width * 0.75, size.height * 0.35, size.width, size.height * 0.3);

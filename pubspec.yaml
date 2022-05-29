@@ -74,6 +74,8 @@ flutter:
     - assets/computer_image.jpeg
     - assets/developper_group.jpeg
     - assets/krimo.svg
+    - assets/jp_retouche.svg
+    - assets/david_retouche.svg
     - assets/favicon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
