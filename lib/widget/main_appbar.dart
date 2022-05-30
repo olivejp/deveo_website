@@ -1,3 +1,4 @@
+import 'package:deveo_site_web/notifier/change_layout_notifier.dart';
 import 'package:deveo_site_web/notifier/on_candidate_clik_notifier.dart';
 import 'package:deveo_site_web/widget/layout_horizontal_padding.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ class MainAppBar extends StatelessWidget {
   const MainAppBar({Key? key}) : super(key: key);
   static const double topBottomPadding = 10;
   static const double buttonPadding = 20;
+  static const double leadingIconSize = 40;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +45,8 @@ class MainAppBar extends StatelessWidget {
                   children: [
                     Image.asset(
                       'assets/favicon.png',
-                      width: 40,
-                      height: 40,
+                      width: leadingIconSize,
+                      height: leadingIconSize,
                     ),
                     Text(
                       'DEVEO',
@@ -52,57 +54,77 @@ class MainAppBar extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    TextButton(
-                      onPressed: () =>
-                          context.read<OnStepClikNotifier>().scroll(1),
-                      child: Text(
-                        'Services',
-                        style: textStyle,
+                Consumer<ChangeLayoutNotifier>(
+                  builder: (context, value, child) {
+                    bool isSmall = false;
+                    if ([Layout.xlarge, Layout.large]
+                        .contains(value.layoutSize)) {
+                      isSmall = false;
+                    } else {
+                      isSmall = true;
+                    }
+                    if (isSmall) {
+                      return Icon(
+                        Icons.reorder_rounded,
+                        color: Colors.grey.shade900,
+                      );
+                    } else {
+                      return child!;
+                    }
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextButton(
+                        onPressed: () =>
+                            context.read<OnStepClikNotifier>().scroll(1),
+                        child: Text(
+                          'Services',
+                          style: textStyle,
+                        ),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () =>
-                          context.read<OnStepClikNotifier>().scroll(2),
-                      child: Text(
-                        'A propos',
-                        style: textStyle,
+                      TextButton(
+                        onPressed: () =>
+                            context.read<OnStepClikNotifier>().scroll(2),
+                        child: Text(
+                          'A propos',
+                          style: textStyle,
+                        ),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () =>
-                          context.read<OnStepClikNotifier>().scroll(2),
-                      child: Text(
-                        'Clients',
-                        style: textStyle,
+                      TextButton(
+                        onPressed: () =>
+                            context.read<OnStepClikNotifier>().scroll(2),
+                        child: Text(
+                          'Clients',
+                          style: textStyle,
+                        ),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () =>
-                          context.read<OnStepClikNotifier>().scroll(3),
-                      child: Text(
-                        'Témoignages',
-                        style: textStyle,
+                      TextButton(
+                        onPressed: () =>
+                            context.read<OnStepClikNotifier>().scroll(3),
+                        child: Text(
+                          'Témoignages',
+                          style: textStyle,
+                        ),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () =>
-                          context.read<OnStepClikNotifier>().scroll(4),
-                      child: Text(
-                        'Candidater',
-                        style: textStyle,
+                      TextButton(
+                        onPressed: () =>
+                            context.read<OnStepClikNotifier>().scroll(4),
+                        child: Text(
+                          'Candidater',
+                          style: textStyle,
+                        ),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () =>
-                          context.read<OnStepClikNotifier>().scroll(5),
-                      child: Text(
-                        'Contact',
-                        style: textStyle,
+                      TextButton(
+                        onPressed: () =>
+                            context.read<OnStepClikNotifier>().scroll(5),
+                        child: Text(
+                          'Contact',
+                          style: textStyle,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

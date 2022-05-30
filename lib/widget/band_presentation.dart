@@ -93,7 +93,9 @@ class _BandPresentationState extends State<BandPresentation> with SingleTickerPr
                                   'DEVEO, une équipe de professionnels',
                                   style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: fontSize),
                                 ),
-                                Row(
+                                Wrap(
+                                  direction: Axis.horizontal,
+                                  spacing: 15,
                                   children: const [
                                     TechnologyIcon(
                                       icon: FontAwesomeIcons.java,
