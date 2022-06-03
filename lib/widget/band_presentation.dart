@@ -14,46 +14,49 @@ class BandPresentation extends StatefulWidget {
   State<BandPresentation> createState() => _BandPresentationState();
 }
 
-class _BandPresentationState extends State<BandPresentation> with SingleTickerProviderStateMixin {
-  AnimationController? _controller;
-  Animation<double>? _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 60),
-    );
-
-    _animation = Tween(begin: 1.0, end: 200.0).animate(_controller!);
-    _controller!.repeat(reverse: true);
-  }
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
-  }
-
+class _BandPresentationState extends State<BandPresentation> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 700,
-      width: double.infinity,
-      child: AnimatedBuilder(
-        animation: _animation!,
-        builder: (context, child) {
-          return Stack(
+    return Consumer<ChangeLayoutNotifier>(
+      builder: (context, value, child) {
+        double height = 700;
+        double fontSize = 30;
+        int leftFlex = 1;
+        int rightFlex = 1;
+        switch (value.layoutSize) {
+          case Layout.xlarge:
+            height = 700;
+            fontSize = 70;
+            leftFlex = 1;
+            rightFlex = 1;
+            break;
+          case Layout.large:
+            height = 600;
+            fontSize = 60;
+            leftFlex = 1;
+            rightFlex = 1;
+            break;
+          case Layout.medium:
+            height = 500;
+            fontSize = 55;
+            leftFlex = 1;
+            rightFlex = 0;
+            break;
+          case Layout.small:
+            height = 450;
+            fontSize = 45;
+            leftFlex = 1;
+            rightFlex = 0;
+            break;
+        }
+        return SizedBox(
+          height: height,
+          width: double.infinity,
+          child: Stack(
             children: [
-              const Positioned.fill(
-                left: 0,
-                right: 0,
-                child: Arc(),
-              ),
               Positioned(
                 top: 100,
-                right: _animation!.value,
+                right: 200,
                 child: Circle(
                   color: Theme.of(context).colorScheme.secondary,
                   radius: 25,
@@ -64,94 +67,43 @@ class _BandPresentationState extends State<BandPresentation> with SingleTickerPr
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Consumer<ChangeLayoutNotifier>(builder: (context, value, child) {
-                      double fontSize = 30;
-                      switch (value.layoutSize) {
-                        case Layout.xlarge:
-                          fontSize = 80;
-                          break;
-                        case Layout.large:
-                          fontSize = 70;
-                          break;
-                        case Layout.medium:
-                          fontSize = 60;
-                          break;
-                        case Layout.small:
-                          fontSize = 45;
-                          break;
-                      }
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            flex: 1,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'DEVEO, une équipe de professionnels',
-                                  style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: fontSize),
-                                ),
-                                Wrap(
-                                  direction: Axis.horizontal,
-                                  spacing: 15,
-                                  children: const [
-                                    TechnologyIcon(
-                                      icon: FontAwesomeIcons.java,
-                                      tooltip: 'Java',
-                                      endColor: Colors.red,
-                                    ),
-                                    TechnologyIcon(
-                                      icon: FontAwesomeIcons.js,
-                                      tooltip: 'Javascript',
-                                      endColor: Colors.red,
-                                    ),
-                                    TechnologyIcon(
-                                      icon: FontAwesomeIcons.leaf,
-                                      tooltip: 'Springboot',
-                                      endColor: Colors.green,
-                                    ),
-                                    TechnologyIcon(
-                                      icon: FontAwesomeIcons.angular,
-                                      tooltip: 'Angular',
-                                      endColor: Colors.red,
-                                    ),
-                                    TechnologyIcon(
-                                      icon: FontAwesomeIcons.git,
-                                      tooltip: 'Git',
-                                      endColor: Colors.red,
-                                    ),
-                                    TechnologyIcon(
-                                      icon: FontAwesomeIcons.html5,
-                                      tooltip: 'Html 5',
-                                      endColor: Colors.blue,
-                                    ),
-                                    TechnologyIcon(
-                                      icon: FontAwesomeIcons.css3,
-                                      tooltip: 'CSS 3',
-                                      endColor: Colors.orange,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                          if ([Layout.medium, Layout.large, Layout.xlarge].contains(value.layoutSize))
-                            Flexible(
-                              flex: 1,
-                              child: Container(
-                                margin: const EdgeInsets.only(left: 20),
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Image.asset('assets/computer_image.jpeg'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          flex: leftFlex,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: (rightFlex == 0)
+                                ? CrossAxisAlignment.center
+                                : CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'DEVEO, une équipe de professionnels',
+                                textAlign: (rightFlex == 0) ? TextAlign.center : TextAlign.start,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline1!
+                                    .copyWith(fontSize: fontSize),
                               ),
-                            )
-                        ],
-                      );
-                    }),
+                              const TechsWrapper()
+                            ],
+                          ),
+                        ),
+                        if (rightFlex > 0)
+                          Flexible(
+                            flex: rightFlex,
+                            child: Container(
+                              margin: const EdgeInsets.only(left: 20),
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Image.asset('assets/computer_image.jpeg'),
+                            ),
+                          )
+                      ],
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(top: 75),
                       child: ElevatedButton(
@@ -170,9 +122,11 @@ class _BandPresentationState extends State<BandPresentation> with SingleTickerPr
                             return Colors.grey;
                           }),
                         ),
-                        onPressed: () => context.read<OnStepClikNotifier>().scroll(4),
+                        onPressed: () =>
+                            context.read<OnStepClikNotifier>().scroll(4),
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 18.0, bottom: 18.0, left: 25.0, right: 25.0),
+                          padding: const EdgeInsets.only(
+                              top: 18.0, bottom: 18.0, left: 25.0, right: 25.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             mainAxisSize: MainAxisSize.min,
@@ -194,9 +148,61 @@ class _BandPresentationState extends State<BandPresentation> with SingleTickerPr
                 ),
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      }
+    );
+  }
+}
+
+class TechsWrapper extends StatelessWidget {
+  const TechsWrapper({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      direction: Axis.horizontal,
+      alignment: WrapAlignment.center,
+      spacing: 15,
+      children: const [
+        TechnologyIcon(
+          icon: FontAwesomeIcons.java,
+          tooltip: 'Java',
+          endColor: Colors.red,
+        ),
+        TechnologyIcon(
+          icon: FontAwesomeIcons.js,
+          tooltip: 'Javascript',
+          endColor: Colors.red,
+        ),
+        TechnologyIcon(
+          icon: FontAwesomeIcons.leaf,
+          tooltip: 'Springboot',
+          endColor: Colors.green,
+        ),
+        TechnologyIcon(
+          icon: FontAwesomeIcons.angular,
+          tooltip: 'Angular',
+          endColor: Colors.red,
+        ),
+        TechnologyIcon(
+          icon: FontAwesomeIcons.git,
+          tooltip: 'Git',
+          endColor: Colors.red,
+        ),
+        TechnologyIcon(
+          icon: FontAwesomeIcons.html5,
+          tooltip: 'Html 5',
+          endColor: Colors.blue,
+        ),
+        TechnologyIcon(
+          icon: FontAwesomeIcons.css3,
+          tooltip: 'CSS 3',
+          endColor: Colors.orange,
+        ),
+      ],
     );
   }
 }

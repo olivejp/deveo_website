@@ -9,6 +9,14 @@ class MainAppBar extends StatelessWidget {
   static const double topBottomPadding = 10;
   static const double buttonPadding = 20;
   static const double leadingIconSize = 40;
+  static const List<String> menus = [
+    'Services',
+    'A propos',
+    'Clients',
+    'Témoignages',
+    'Contact',
+    'Candidater'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -17,120 +25,96 @@ class MainAppBar extends StatelessWidget {
               fontWeight: FontWeight.w600,
               fontSize: 17,
             );
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        border: Border(
-          bottom: BorderSide(color: Colors.grey.shade100),
+    return TextButtonTheme(
+      data: TextButtonThemeData(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(
+            const EdgeInsets.all(buttonPadding),
+          ),
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.only(
-          top: topBottomPadding,
-          bottom: topBottomPadding,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          border: Border(
+            bottom: BorderSide(color: Colors.grey.shade100),
+          ),
         ),
-        child: TextButtonTheme(
-          data: TextButtonThemeData(
-            style: ButtonStyle(
-              padding: MaterialStateProperty.all(
-                const EdgeInsets.all(buttonPadding),
-              ),
-            ),
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: topBottomPadding,
+            bottom: topBottomPadding,
           ),
           child: LayoutHorizontalPadding(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/favicon.png',
-                      width: leadingIconSize,
-                      height: leadingIconSize,
-                    ),
-                    Text(
-                      'DEVEO',
-                      style: Theme.of(context).textTheme.subtitle1,
-                    ),
-                  ],
+                const NavBarLeft(
+                  leadingIconSize: leadingIconSize,
                 ),
                 Consumer<ChangeLayoutNotifier>(
-                  builder: (context, value, child) {
-                    bool isSmall = false;
+                  builder: (_, value, child) {
                     if ([Layout.xlarge, Layout.large]
                         .contains(value.layoutSize)) {
-                      isSmall = false;
-                    } else {
-                      isSmall = true;
-                    }
-                    if (isSmall) {
-                      return Icon(
-                        Icons.reorder_rounded,
-                        color: Colors.grey.shade900,
-                      );
-                    } else {
                       return child!;
+                    } else {
+                      return PopupMenuButton(
+                        icon: Icon(
+                          Icons.reorder_rounded,
+                          color: Colors.grey.shade900,
+                        ),
+                        itemBuilder: (BuildContext context) {
+                          return menus
+                              .map((e) =>
+                                  PopupMenuItem(value: e, child: Text(e)))
+                              .toList();
+                        },
+                      );
                     }
                   },
                   child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextButton(
-                        onPressed: () =>
-                            context.read<OnStepClikNotifier>().scroll(1),
-                        child: Text(
-                          'Services',
-                          style: textStyle,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () =>
-                            context.read<OnStepClikNotifier>().scroll(2),
-                        child: Text(
-                          'A propos',
-                          style: textStyle,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () =>
-                            context.read<OnStepClikNotifier>().scroll(2),
-                        child: Text(
-                          'Clients',
-                          style: textStyle,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () =>
-                            context.read<OnStepClikNotifier>().scroll(3),
-                        child: Text(
-                          'Témoignages',
-                          style: textStyle,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () =>
-                            context.read<OnStepClikNotifier>().scroll(4),
-                        child: Text(
-                          'Candidater',
-                          style: textStyle,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () =>
-                            context.read<OnStepClikNotifier>().scroll(5),
-                        child: Text(
-                          'Contact',
-                          style: textStyle,
-                        ),
-                      ),
-                    ],
-                  ),
+                      mainAxisSize: MainAxisSize.min,
+                      children: menus
+                          .map(
+                            (e) => TextButton(
+                                onPressed: () => context
+                                    .read<OnStepClikNotifier>()
+                                    .scroll(menus.indexOf(e)),
+                                child: Text(e, style: textStyle)),
+                          )
+                          .toList()),
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class NavBarLeft extends StatelessWidget {
+  const NavBarLeft({
+    Key? key,
+    required this.leadingIconSize,
+  }) : super(key: key);
+
+  final double leadingIconSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Image.asset(
+          'assets/favicon.png',
+          width: leadingIconSize,
+          height: leadingIconSize,
+        ),
+        Text(
+          'DEVEO',
+          style: Theme.of(context).textTheme.subtitle1,
+        ),
+      ],
     );
   }
 }
