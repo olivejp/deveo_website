@@ -17,141 +17,164 @@ class BandPresentation extends StatefulWidget {
 class _BandPresentationState extends State<BandPresentation> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<ChangeLayoutNotifier>(
-      builder: (context, value, child) {
-        double height = 700;
-        double fontSize = 30;
-        int leftFlex = 1;
-        int rightFlex = 1;
-        switch (value.layoutSize) {
-          case Layout.xlarge:
-            height = 700;
-            fontSize = 70;
-            leftFlex = 1;
-            rightFlex = 1;
-            break;
-          case Layout.large:
-            height = 600;
-            fontSize = 60;
-            leftFlex = 1;
-            rightFlex = 1;
-            break;
-          case Layout.medium:
-            height = 500;
-            fontSize = 55;
-            leftFlex = 1;
-            rightFlex = 0;
-            break;
-          case Layout.small:
-            height = 450;
-            fontSize = 45;
-            leftFlex = 1;
-            rightFlex = 0;
-            break;
-        }
-        return SizedBox(
-          height: height,
-          width: double.infinity,
-          child: Stack(
-            children: [
-              Positioned(
-                top: 100,
-                right: 200,
-                child: Circle(
-                  color: Theme.of(context).colorScheme.secondary,
-                  radius: 25,
-                ),
-              ),
-              LayoutHorizontalPadding(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          flex: leftFlex,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: (rightFlex == 0)
-                                ? CrossAxisAlignment.center
-                                : CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'DEVEO, une équipe de professionnels',
-                                textAlign: (rightFlex == 0) ? TextAlign.center : TextAlign.start,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline1!
-                                    .copyWith(fontSize: fontSize),
+    return Consumer<ChangeLayoutNotifier>(builder: (context, value, child) {
+      double height = 700;
+      double fontSize = 30;
+      int leftFlex = 1;
+      int rightFlex = 1;
+      switch (value.layoutSize) {
+        case Layout.xlarge:
+          height = 700;
+          fontSize = 70;
+          leftFlex = 1;
+          rightFlex = 1;
+          break;
+        case Layout.large:
+          height = 600;
+          fontSize = 60;
+          leftFlex = 1;
+          rightFlex = 1;
+          break;
+        case Layout.medium:
+          height = 500;
+          fontSize = 55;
+          leftFlex = 1;
+          rightFlex = 0;
+          break;
+        case Layout.small:
+          height = 450;
+          fontSize = 45;
+          leftFlex = 1;
+          rightFlex = 0;
+          break;
+      }
+      return SizedBox(
+        height: height,
+        width: double.infinity,
+        child: Stack(
+          children: [
+            LayoutHorizontalPadding(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: (rightFlex == 0)
+                    ? CrossAxisAlignment.center
+                    : CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: (rightFlex == 0)
+                          ? const DecorationImage(
+                              image: AssetImage('assets/computer_image.jpeg'),
+                              fit: BoxFit.cover,
+                              opacity: 1,
+                              colorFilter: ColorFilter.mode(
+                                Colors.black26,
+                                BlendMode.darken,
                               ),
-                              const TechsWrapper()
-                            ],
-                          ),
-                        ),
-                        if (rightFlex > 0)
-                          Flexible(
-                            flex: rightFlex,
-                            child: Container(
-                              margin: const EdgeInsets.only(left: 20),
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Image.asset('assets/computer_image.jpeg'),
-                            ),
-                          )
-                      ],
+                            )
+                          : null,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 75),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(const StadiumBorder()),
-                          elevation: MaterialStateProperty.resolveWith((states) {
-                            if (states.contains(MaterialState.hovered)) {
-                              return 20;
-                            }
-                            return 5;
-                          }),
-                          shadowColor: MaterialStateProperty.resolveWith((states) {
-                            if (states.contains(MaterialState.hovered)) {
-                              return Theme.of(context).colorScheme.secondary;
-                            }
-                            return Colors.grey;
-                          }),
-                        ),
-                        onPressed: () =>
-                            context.read<OnStepClikNotifier>().scroll(4),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 18.0, bottom: 18.0, left: 25.0, right: 25.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20, right: 20),
-                                child: Text(
-                                  'Candidater',
-                                  style: Theme.of(context).textTheme.button,
+                    child: Padding(
+                      padding: (rightFlex == 0)
+                          ? const EdgeInsets.all(80.0)
+                          : EdgeInsets.zero,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            flex: leftFlex,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: (rightFlex == 0)
+                                  ? CrossAxisAlignment.center
+                                  : CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'DEVEO, une équipe de professionnels',
+                                  textAlign: (rightFlex == 0)
+                                      ? TextAlign.center
+                                      : TextAlign.start,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline1!
+                                      .copyWith(
+                                        fontSize: fontSize,
+                                        color: (rightFlex == 0
+                                            ? Colors.white
+                                            : Colors.black),
+                                      ),
                                 ),
-                              ),
-                              const Icon(Icons.newspaper)
-                            ],
+                                const TechsWrapper()
+                              ],
+                            ),
                           ),
+                          if (rightFlex > 0)
+                            Flexible(
+                              flex: rightFlex,
+                              child: Container(
+                                margin: const EdgeInsets.only(left: 20),
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child:
+                                    Image.asset('assets/computer_image.jpeg'),
+                              ),
+                            )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 75),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all(const StadiumBorder()),
+                        elevation: MaterialStateProperty.resolveWith((states) {
+                          if (states.contains(MaterialState.hovered)) {
+                            return 20;
+                          }
+                          return 5;
+                        }),
+                        shadowColor:
+                            MaterialStateProperty.resolveWith((states) {
+                          if (states.contains(MaterialState.hovered)) {
+                            return Theme.of(context).colorScheme.secondary;
+                          }
+                          return Colors.grey;
+                        }),
+                      ),
+                      onPressed: () =>
+                          context.read<OnStepClikNotifier>().scroll(4),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 18.0, bottom: 18.0, left: 25.0, right: 25.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              child: Text(
+                                'Candidater',
+                                style: Theme.of(context).textTheme.button,
+                              ),
+                            ),
+                            const Icon(Icons.newspaper)
+                          ],
                         ),
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
-            ],
-          ),
-        );
-      }
-    );
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
 

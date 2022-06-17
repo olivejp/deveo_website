@@ -7,7 +7,7 @@ import 'package:deveo_site_web/widget/band_competences.dart';
 import 'package:deveo_site_web/widget/band_presentation.dart';
 import 'package:deveo_site_web/widget/band_resources.dart';
 import 'package:deveo_site_web/widget/band_temoignages.dart';
-import 'package:deveo_site_web/widget/layout_notifier.dart';
+import 'package:deveo_site_web/notifier/layout_notifier.dart';
 import 'package:deveo_site_web/widget/main_appbar.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
